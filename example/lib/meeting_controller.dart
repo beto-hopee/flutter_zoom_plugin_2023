@@ -60,8 +60,8 @@ class MeetingController extends GetxController {
     if (meetingIdController.text.isNotEmpty && meetingPasswordController.text.isNotEmpty) {
       var meetingOptions = ZoomMeetingOptions(
         userId: userId,
-        meetingId: meetingId /* meetingIdController.text */,
-        meetingPassword: meetingPassword /* meetingPasswordController.text */,
+        meetingId: meetingId.isNotEmpty ? meetingId : meetingIdController.text,
+        meetingPassword: meetingPassword.isNotEmpty ? meetingPassword : meetingPasswordController.text,
         disableDialIn: "true",
         disableDrive: "true",
         disableInvite: "true",
@@ -126,7 +126,7 @@ class MeetingController extends GetxController {
     var meetingOptions = ZoomMeetingOptions(
       userId: userId,
       userPassword: userPassword,
-      meetingId: meetingIdController.text,
+      meetingId: meetingId.isNotEmpty ? meetingId : meetingIdController.text,
       disableDialIn: "false",
       disableDrive: "false",
       disableInvite: "false",

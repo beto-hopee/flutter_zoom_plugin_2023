@@ -35,7 +35,7 @@ class ZoomView extends ZoomPlatform {
     optionMap.putIfAbsent("disableDrive", () => options.disableDrive);
     optionMap.putIfAbsent("disableInvite", () => options.disableInvite);
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
-    optionMap.putIfAbsent("disableTitlebar", () => options.disableTitlebar);
+    optionMap.putIfAbsent("disableTitleBar", () => options.disableTitleBar);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
     optionMap.putIfAbsent("viewOptions", () => options.viewOptions);
@@ -56,42 +56,16 @@ class ZoomView extends ZoomPlatform {
     optionMap.putIfAbsent("disableDrive", () => options.disableDrive);
     optionMap.putIfAbsent("disableInvite", () => options.disableInvite);
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
-    optionMap.putIfAbsent("disableTitlebar", () => options.disableTitlebar);
+    optionMap.putIfAbsent("disableTitleBar", () => options.disableTitleBar);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("hideMeetingInviteUrl", () => options.hideMeetingInviteUrl);
-    // optionMap.putIfAbsent("viewOptions", () => options.viewOptions);
+    optionMap.putIfAbsent("viewOptions", () => options.viewOptions);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
     if (options.meetingViewOptions != null) {
       optionMap.putIfAbsent("meetingViewOptions", () => options.meetingViewOptions!.toString());
     }
-    
+
     return await channel.invokeMethod<bool>('join', optionMap).then<bool>((bool? value) => value ?? false);
-  }
-
-  /// The event channel used to interact with the native platform startMeeting(login on iOS & Android) function
-  @override
-  Future<List> startMeeting(ZoomMeetingOptions options) async {
-    var optionMap = <String, String?>{};
-    optionMap.putIfAbsent("userId", () => options.userId);
-    optionMap.putIfAbsent("userPassword", () => options.userPassword);
-    optionMap.putIfAbsent("zoomAccessToken", () => options.zoomAccessToken);
-    optionMap.putIfAbsent("displayName", () => options.displayName);
-    optionMap.putIfAbsent("zoomToken", () => options.zoomToken);
-    optionMap.putIfAbsent("meetingId", () => options.meetingId);
-    optionMap.putIfAbsent("disableDialIn", () => options.disableDialIn);
-    optionMap.putIfAbsent("disableDrive", () => options.disableDrive);
-    optionMap.putIfAbsent("disableInvite", () => options.disableInvite);
-    optionMap.putIfAbsent("disableShare", () => options.disableShare);
-    optionMap.putIfAbsent("disableTitlebar", () => options.disableTitlebar);
-    // optionMap.putIfAbsent("viewOptions", () => options.viewOptions);
-    optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
-    optionMap.putIfAbsent("noAudio", () => options.noAudio);
-    optionMap.putIfAbsent("hideMeetingInviteUrl", () => options.hideMeetingInviteUrl);
-    if (options.meetingViewOptions != null) {
-      optionMap.putIfAbsent("meetingViewOptions", () => options.meetingViewOptions!.toString());
-    }
-
-    return await channel.invokeMethod<List>('login', optionMap).then<List>((List? value) => value ?? List.empty());
   }
 
   /// The event channel used to interact with the native platform meetingStatus function
@@ -111,9 +85,9 @@ class ZoomView extends ZoomPlatform {
     return eventChannel.receiveBroadcastStream();
   }
 
-  /// The event channel used to interact with the native platform meetinDetails(iOS & Android) function
+  /// The event channel used to interact with the native platform meetingDetails(iOS & Android) function
   @override
-  Future<List> meetinDetails() async {
+  Future<List> meetingDetails() async {
     return await channel.invokeMethod<List>('meeting_details').then<List>((List? value) => value ?? List.empty());
   }
 }

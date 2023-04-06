@@ -175,7 +175,7 @@ class ZoomMeetingOptions {
   String? disableShare;
 
   /// Disable Share Mode
-  String? disableTitlebar;
+  String? disableTitleBar;
 
   /// Disable Title Bar Mode
   String? noDisconnectAudio;
@@ -202,8 +202,9 @@ class ZoomMeetingOptions {
   int? meetingViewOptions;
 
   String? hideMeetingInviteUrl;
-  ///To Hide Meeting Invite Url 
-  
+
+  ///To Hide Meeting Invite Url
+
   ZoomMeetingOptions({
     this.userId = '',
     this.userPassword = '',
@@ -214,7 +215,7 @@ class ZoomMeetingOptions {
     this.disableDrive,
     this.disableInvite,
     this.disableShare,
-    this.disableTitlebar,
+    this.disableTitleBar,
     this.noDisconnectAudio,
     this.viewOptions,
     this.noAudio,

@@ -29,14 +29,17 @@ class ZoomView extends ZoomPlatform {
   Future<List> startMeetingNormal(ZoomMeetingOptions options) async {
     var optionMap = <String, String?>{};
     optionMap.putIfAbsent("userId", () => options.userId);
-    optionMap.putIfAbsent("userPassword", () => options.userPassword);
+    optionMap.putIfAbsent("displayName", () => options.displayName);
+    optionMap.putIfAbsent("zoomAccessToken", () => options.zoomAccessToken);
+    optionMap.putIfAbsent("zoomToken", () => options.zoomToken);
     optionMap.putIfAbsent("meetingId", () => options.meetingId);
     optionMap.putIfAbsent("disableDialIn", () => options.disableDialIn);
     optionMap.putIfAbsent("disableDrive", () => options.disableDrive);
     optionMap.putIfAbsent("disableInvite", () => options.disableInvite);
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
-    optionMap.putIfAbsent("disableTitleBar", () => options.disableTitleBar);
+    optionMap.putIfAbsent("disableTitlebar", () => options.disableTitlebar);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
+    optionMap.putIfAbsent("hideMeetingInviteUrl", () => options.hideMeetingInviteUrl);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
     optionMap.putIfAbsent("viewOptions", () => options.viewOptions);
 
@@ -56,7 +59,7 @@ class ZoomView extends ZoomPlatform {
     optionMap.putIfAbsent("disableDrive", () => options.disableDrive);
     optionMap.putIfAbsent("disableInvite", () => options.disableInvite);
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
-    optionMap.putIfAbsent("disableTitleBar", () => options.disableTitleBar);
+    optionMap.putIfAbsent("disableTitlebar", () => options.disableTitlebar);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("hideMeetingInviteUrl", () => options.hideMeetingInviteUrl);
     optionMap.putIfAbsent("viewOptions", () => options.viewOptions);

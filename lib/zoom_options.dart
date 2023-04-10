@@ -175,7 +175,7 @@ class ZoomMeetingOptions {
   String? disableShare;
 
   /// Disable Share Mode
-  String? disableTitleBar;
+  String? disableTitlebar;
 
   /// Disable Title Bar Mode
   String? noDisconnectAudio;
@@ -215,7 +215,7 @@ class ZoomMeetingOptions {
     this.disableDrive,
     this.disableInvite,
     this.disableShare,
-    this.disableTitleBar,
+    this.disableTitlebar,
     this.noDisconnectAudio,
     this.viewOptions,
     this.noAudio,

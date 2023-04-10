@@ -9,7 +9,7 @@ import 'package:flutter_zoom/zoom_view.dart';
 
 class MeetingController extends GetxController {
 // set force debug mode for pint()
-  bool forceDebugMode = true;
+  bool forceDebugMode = false;
 
 // for view
   TextEditingController meetingIdController = TextEditingController();
@@ -19,13 +19,11 @@ class MeetingController extends GetxController {
   late Timer timer;
   ZoomOptions zoomOptions = ZoomOptions(
     domain: "zoom.us",
-    appKey: "XKE4uWfeLwWEmh78YMbC6mqKcF8oM4YHTr9I", //API KEY FROM ZOOM -- SDK KEY
-    appSecret: "bT7N61pQzaLXU6VLj9TVl7eYuLbqAiB0KAdb", //API SECRET FROM ZOOM -- SDK SECRET
+    appKey: "avKZGpzmdD9hDXdKrzqnc1SaaS5Xqn0CmP6T", //API KEY FROM ZOOM -- SDK KEY
+    appSecret: "BnAYpHVFQ5TMll0wG68PhhDAzThUZmwtQZMz", //API SECRET FROM ZOOM -- SDK SECRET
   );
 
 // for value
-  String zoomAccessTokenZAK =
-      'eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InVvTlNtOEVNUjgtMWV5TDlaMk5Td3ciLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEwMCwid2NkIjoiYXcxIiwiY2x0IjowLCJleHAiOjE2NzExMTE0NDMsImlhdCI6MTY3MTEwNDI0MywiYWlkIjoiZkxXTUtmdVRRSGFlSkl3Mml2SWdkZyIsImNpZCI6IiJ9.lctRrzvEv-0TT8nB2khUqMxCZvQV3CRE9Lq1aaXnswc';
   String userId = "";
 
   /// Username For Join Meeting & Host Email For Start Meeting
@@ -34,24 +32,21 @@ class MeetingController extends GetxController {
   /// Host Password For Start Meeting
   String displayName = "";
 
-  /// Display Name
-  String meetingId = "";
-
-  /// Personal meeting id for start meeting required
-  String meetingPassword = "";
-
   /// Disable No Audio
   String zoomToken = "";
 
   /// Zoom token for SDK
-  String zoomAccessToken = "";
+  String zoomAccessToken =
+      "eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InVNMnVYc01uUVJPOGJVZ1REbWVnWUEiLCJpc3MiOiJ3ZWIiLCJzayI6IjMyNDUxMTA3ODA5MzUyNTMzOTUiLCJzdHkiOjEwMCwid2NkIjoidXMwNSIsImNsdCI6MCwiZXhwIjoxNjgxMTE2MDU5LCJpYXQiOjE2ODExMDg4NTksImFpZCI6Ijdrdy03dGlYU1N1QU50QlZlZE1DSVEiLCJjaWQiOiIifQ.UZ2DAxdX_J-YOeVC2LEduO1Ji2wD47d719QAqJ2TTFY";
 
   ///To Hide Meeting Invite Url
   @override
   void onReady() {
     super.onReady();
-    meetingIdController.text = "";
-    meetingPasswordController.text = "";
+    meetingIdController.text = "84401838175";
+    meetingPasswordController.text = "cgk2AZ";
+    userId = "hvlamdev@gmail.com";
+    displayName = "Van Lam";
   }
 
   /// Join meeting with meeting id
@@ -60,13 +55,13 @@ class MeetingController extends GetxController {
     if (meetingIdController.text.isNotEmpty && meetingPasswordController.text.isNotEmpty) {
       var meetingOptions = ZoomMeetingOptions(
         userId: userId,
-        meetingId: meetingId.isNotEmpty ? meetingId : meetingIdController.text,
-        meetingPassword: meetingPassword.isNotEmpty ? meetingPassword : meetingPasswordController.text,
+        meetingId: meetingIdController.text,
+        meetingPassword: meetingPasswordController.text,
         disableDialIn: "true",
         disableDrive: "true",
         disableInvite: "true",
         disableShare: "true",
-        disableTitleBar: "false",
+        disableTitlebar: "false",
         viewOptions: "true",
         noAudio: "false",
         noDisconnectAudio: "false",
@@ -125,16 +120,17 @@ class MeetingController extends GetxController {
   startMeetingNormal(BuildContext context) {
     var meetingOptions = ZoomMeetingOptions(
       userId: userId,
-      userPassword: userPassword,
-      meetingId: meetingId.isNotEmpty ? meetingId : meetingIdController.text,
+      displayName: displayName,
+      meetingId: meetingIdController.text,
       disableDialIn: "false",
       disableDrive: "false",
       disableInvite: "false",
       disableShare: "false",
-      disableTitleBar: "false",
+      disableTitlebar: "false",
       viewOptions: "false",
       noAudio: "false",
       noDisconnectAudio: "false",
+      zoomAccessToken: zoomAccessToken,
     );
 
     var zoom = ZoomView();
@@ -159,6 +155,7 @@ class MeetingController extends GetxController {
             });
           }
         });
+
         zoom.startMeetingNormal(meetingOptions).then((loginResult) {
           if (kDebugMode || forceDebugMode) {
             print("[LoginResult] :- " + loginResult.toString());

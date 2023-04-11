@@ -202,8 +202,9 @@ class ZoomMeetingOptions {
   int? meetingViewOptions;
 
   String? hideMeetingInviteUrl;
-  ///To Hide Meeting Invite Url 
-  
+
+  ///To Hide Meeting Invite Url
+
   ZoomMeetingOptions({
     this.userId = '',
     this.userPassword = '',

@@ -37,9 +37,6 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
           switch call.method {
           case "init":
               self.initZoom(call: call, result: result)
-          case "login":
-              self.startMeeting(call:call, result:result);
-            //   self.login(call: call, result: result)
           case "join":
               self.joinMeeting(call: call, result: result)
           case "startNormal":
@@ -58,9 +55,6 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
           switch call.method {
           case "init":
               self.initZoom(call: call, result: result)
-          case "login":
-              self.startMeeting(call:call, result:result);
-            //   self.login(call: call, result: result)
           case "join":
               self.joinMeeting(call: call, result: result)
           case "start":
@@ -103,17 +97,7 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
     
         //Perform start meeting function with logging in to the zoom account (Only for passed meeting id)
         public func startMeetingNormal(call: FlutterMethodCall, result: @escaping FlutterResult) {
-             /*    let authService = MobileRTC.shared().getAuthService()
-                  
-                if ((authService?.isLoggedIn()) == true) {
-                    self.startMeetingNormalInternal(call:call, result:result);
-                }else{
-                    let arguments = call.arguments as! Dictionary<String, String?>
-                    authService?.login(withEmail: arguments["userId"]!!, password: arguments["userPassword"]!!, rememberMe: false)
-                    if ((authService?.isLoggedIn()) == true) {
-                        self.startMeetingNormalInternal(call:call, result:result);
-                    }
-                } */
+            self.startMeetingNormalInternal(call:call, result:result);
         }
 
         //Listen to meeting status on joinning and starting the mmeting
@@ -226,8 +210,6 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
 
             let meetingService = MobileRTC.shared().getMeetingService()
             let meetingSettings = MobileRTC.shared().getMeetingSettings()
-            let authService = MobileRTC.shared().getAuthService()
-           
             if meetingService != nil{
                 /* if ((authService?.isLoggedIn()) == true) { */
                     let arguments = call.arguments as! Dictionary<String, String?>
@@ -291,9 +273,6 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
                         print("Got response from start: \(response)")
                     }
                     result(["MEETING SUCCESS", "200"])
-                /* }else{
-                    result(["LOGIN REQUIRED", "001"])
-                } */
             } else {
                 result(["SDK ERROR", "001"])
             }
@@ -304,12 +283,9 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
 
             let meetingService = MobileRTC.shared().getMeetingService()
             let meetingSettings = MobileRTC.shared().getMeetingSettings()
-            let authService = MobileRTC.shared().getAuthService()
         
             if meetingService != nil{
-                if ((authService?.isLoggedIn()) == true) {
                     let arguments = call.arguments as! Dictionary<String, String?>
-
                     //Setting up meeting settings for zoom sdk
                     meetingSettings?.disableDriveMode(parseBoolean(data: arguments["disableDrive"]!, defaultValue: false))
                     meetingSettings?.disableCall(in: parseBoolean(data: arguments["disableDialIn"]!, defaultValue: false))
@@ -323,22 +299,20 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
                         meetingSettings?.meetingPasswordHidden = true
                         meetingSettings?.meetingParticipantHidden = true
                     } */
-                    
                     //Setting up Start Meeting parameter
-                    let startMeetingParameters = MobileRTCMeetingStartParam4LoginlUser()
+                    let startMeetingParameters = MobileRTCMeetingStartParam4WithoutLoginUser()
                     //Passing custom Meeting ID for start meeting
                     startMeetingParameters.meetingNumber = arguments["meetingId"]!!
-
-                    //Starting the meeting and storing the response
+                    startMeetingParameters.userType = MobileRTCUserType.apiUser
+                    startMeetingParameters.userName = arguments["displayName"]!!
+                    startMeetingParameters.userID = arguments["userId"]!!
+                    startMeetingParameters.zak = arguments["zoomAccessToken"]!!
                     let response = meetingService?.startMeeting(with: startMeetingParameters)
 
                     if let response = response {
                         print("Got response from start: \(response)")
                     }
                     result(["MEETING SUCCESS", "200"])
-                }else{
-                    result(["LOGIN REQUIRED", "001"])
-                }
             } else {
                 result(["SDK ERROR", "001"])
             }
@@ -473,12 +447,6 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
 
                 self.result = nil
             }
-            
-            //Zoom SDK Authentication Listner - On onMobileRTCLoginReturn get status
-            public func onMobileRTCLoginReturn(_ returnValue: Int){
-
-            }
-
             //Zoom SDK Authentication Listner - On onMobileRTCLogoutReturn get message
             public func onMobileRTCLogoutReturn(_ returnValue: Int) {
 
@@ -492,19 +460,3 @@ public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandle
                 return message
             }
         }
-
-
-/* import Flutter
-import UIKit
-
-public class SwiftFlutterZoomPlugin: NSObject, FlutterPlugin {
-  public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_zoom", binaryMessenger: registrar.messenger())
-    let instance = SwiftFlutterZoomPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
-  }
-
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
-  }
-} */

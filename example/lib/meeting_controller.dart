@@ -37,14 +37,14 @@ class MeetingController extends GetxController {
 
   /// Zoom token for SDK
   String zoomAccessToken =
-      "eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InVNMnVYc01uUVJPOGJVZ1REbWVnWUEiLCJpc3MiOiJ3ZWIiLCJzayI6IjMyNDUxMTA3ODA5MzUyNTMzOTUiLCJzdHkiOjEwMCwid2NkIjoidXMwNSIsImNsdCI6MCwiZXhwIjoxNjgxMTE2MDU5LCJpYXQiOjE2ODExMDg4NTksImFpZCI6Ijdrdy03dGlYU1N1QU50QlZlZE1DSVEiLCJjaWQiOiIifQ.UZ2DAxdX_J-YOeVC2LEduO1Ji2wD47d719QAqJ2TTFY";
+      "eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InVNMnVYc01uUVJPOGJVZ1REbWVnWUEiLCJpc3MiOiJ3ZWIiLCJzayI6IjMyNDUxMTA3ODA5MzUyNTMzOTUiLCJzdHkiOjEwMCwid2NkIjoidXMwNSIsImNsdCI6MCwiZXhwIjoxNjgxMTg1MTA5LCJpYXQiOjE2ODExNzc5MDksImFpZCI6Ijdrdy03dGlYU1N1QU50QlZlZE1DSVEiLCJjaWQiOiIifQ.j7-5jweLqQCWF8aZaXiVdwunywzA5iFIyKU0V00N0fg";
 
   ///To Hide Meeting Invite Url
   @override
   void onReady() {
     super.onReady();
-    meetingIdController.text = "84401838175";
-    meetingPasswordController.text = "cgk2AZ";
+    meetingIdController.text = "87256899611";
+    meetingPasswordController.text = "6LPm81";
     userId = "hvlamdev@gmail.com";
     displayName = "Van Lam";
   }
@@ -57,6 +57,7 @@ class MeetingController extends GetxController {
         userId: userId,
         meetingId: meetingIdController.text,
         meetingPassword: meetingPasswordController.text,
+        displayName: displayName,
         disableDialIn: "true",
         disableDrive: "true",
         disableInvite: "true",

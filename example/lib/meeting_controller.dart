@@ -43,10 +43,10 @@ class MeetingController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    meetingIdController.text = "87256899611";
-    meetingPasswordController.text = "6LPm81";
-    userId = "hvlamdev@gmail.com";
-    displayName = "Van Lam";
+    // meetingIdController.text = "87256899611";
+    // meetingPasswordController.text = "6LPm81";
+    // userId = "hvlamdev@gmail.com";
+    // displayName = "Van Lam";
   }
 
   /// Join meeting with meeting id
